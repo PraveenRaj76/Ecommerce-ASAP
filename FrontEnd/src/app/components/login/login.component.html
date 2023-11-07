@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="jumbotron">
+    <div class="row">
+      <div class="col-md-6 d-flex mx-auto flex-column">
+        <ng-container *ngIf="$any(loginMessage)?.length > 0">
+          <div class="alert alert-danger alert-dismissible text-center">
+            {{loginMessage}}
+          </div>
+        </ng-container>
+        <form novalidate #myform="ngForm">
+          <div class="form-group">
+            <label for="emailorusername">Email or Username</label>
+            <input class="form-control" id="emailorusername" type="text" [(ngModel)]="emailorusername" name="emailorusername" required>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-group">
+              <input class="form-control" id="password" [type]="fieldTextType ? 'text' : 'password'" [(ngModel)]="password" name="password" required>
+              <div class="input-group-append">
+                <span class="input-group-text">
+                  <i
+                    class="fa"
+                    [ngClass]="{
+                      'fa-eye-slash': !fieldTextType,
+                       'fa-eye': fieldTextType
+                    }"
+                    (click)="toggleFieldTextType()"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex flex-column align-items-center justify-content-around">
+            <button class="btn btn-primary btn-sm btn-block" (click)="login(myform)" [disabled]="myform.invalid && myform.touched">Login</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

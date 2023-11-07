@@ -1,0 +1,119 @@
+<div class="container my-5">
+  <ng-container *ngIf="$any(contactMessage)?.length > 0">
+    <div class="alert alert-success alert-dismissible">
+      {{contactMessage}}
+    </div>
+  </ng-container>
+
+  <form (ngSubmit)="contactUser()" [formGroup]="contactForm" class="form-horizontal" novalidate>
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <h2>Get in Touch</h2>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 field-label-responsive">
+        <label for="name">Name</label>
+      </div>
+      <div class="col-md-5">
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-prepend" style="width: 2.6rem"></div>
+            <input class="form-control" formControlName="name" id="name" name="name"
+                   placeholder="Your name"
+                   required type="text">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-control-feedback">
+          <span class="text-danger align-middle">
+            <!-- Put name validation error messages here -->
+            <ng-container *ngIf="formControls['name'].errors?.['required'] && formControls['name'].touched">
+              <span class="text-danger align-middle">
+                <i class="fa fa-times"> Name Required</i>
+              </span>
+            </ng-container>
+            <ng-container *ngIf="formControls['name'].errors?.['minlength'] && !formControls['name'].errors?.['pattern'] && formControls['name'].touched">
+              <span class="text-danger align-middle">
+                <i class="fa fa-times"> Name must be least 3 characters long</i>
+              </span>
+            </ng-container>
+            <ng-container *ngIf="!formControls['name'].errors?.['minlength'] && formControls['name'].errors?.['pattern'] && formControls['name'].touched">
+              <span class="text-danger align-middle">
+                <i class="fa fa-times"> Enter only characters</i>
+              </span>
+            </ng-container>
+            <ng-container *ngIf="formControls['name'].errors?.['minlength'] && formControls['name'].errors?.['pattern'] && formControls['name'].touched">
+              <span class="text-danger align-middle">
+                <i class="fa fa-times"> Name must be least 3 characters long & contains only characters</i>
+              </span>
+            </ng-container>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 field-label-responsive">
+        <label for="email">E-Mail</label>
+      </div>
+      <div class="col-md-5">
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon" style="width: 2.6rem"></div>
+            <input class="form-control" formControlName="email" id="email" name="email"
+                   placeholder="Your email"
+                   required type="text">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-control-feedback">
+          <ng-container *ngIf="formControls['email'].errors?.['required'] && formControls['email'].touched">
+            <span class="text-danger align-middle">
+              <i class="fa fa-times"> Email Required</i>
+            </span>
+          </ng-container>
+          <ng-container *ngIf="formControls['email'].errors?.['pattern'] && formControls['email'].touched">
+            <span class="text-danger align-middle">
+              <i class="fa fa-times"> Please enter correct Email</i>
+            </span>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 field-label-responsive">
+        <label for="message">Message</label>
+      </div>
+      <div class="col-md-5">
+        <div class="form-group has-danger">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon" style="width: 2.6rem"></div>
+            <textarea class="form-control" formControlName="message" id="message" class="text_field contact_form_message" name="message" rows="4" placeholder="Message" required="required"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-control-feedback">
+          <ng-container *ngIf="formControls['message'].errors?.['required'] && formControls['message'].touched">
+            <span class="text-danger align-middle">
+              <i class="fa fa-times"> Please, write us a message</i>
+            </span>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-5">
+        <button [disabled]="(contactForm.invalid || contactForm.pending) && contactForm.touched"
+                class="btn btn-success" type="submit">
+          Send Message
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

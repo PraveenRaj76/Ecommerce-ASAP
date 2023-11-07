@@ -1,0 +1,64 @@
+<div class="container emp-profile">
+  <form novalidate>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="profile-head">
+          <h5>
+            {{myUser?.name || (myUser.fname + ' ' + myUser.lname)}}
+          </h5>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <button (click)="logout()" class="btn btn-secondary btn-sm" name="btnAddMore" type="button">Logout</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="tab-content profile-tab" id="myTabContent">
+          <div aria-labelledby="home-tab" class="tab-pane fade show active" id="home" role="tabpanel">
+            <div class="row">
+              <div class="col-md-6">
+                <label>User Id</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{myUser.id || myUser.userId}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Username</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{myUser.name || myUser.username}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Name</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{myUser.name || (myUser.fname + ' ' + myUser.lname)}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Email</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{myUser.email}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Age</label>
+              </div>
+              <div class="col-md-6">
+                <p>{{myUser.age || myUser.Age}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

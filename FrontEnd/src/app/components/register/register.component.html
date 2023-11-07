@@ -1,0 +1,311 @@
+<div class="container my-5">
+
+  <ng-container *ngIf="$any(registrationMessage)?.length > 0">
+    <div class="alert alert-success alert-dismissible">
+      {{registrationMessage}}
+    </div>
+  </ng-container>
+
+  <form (ngSubmit)="registerUser()" [formGroup]="registrationForm" class="form-horizontal" novalidate>
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-5">
+        <h2>Register New User</h2>
+        <hr>
+      </div>
+    </div>
+    <!-- First Name -->
+    <div class="row">
+      <div class="col-md-3 field-label-responsive">
+        <label for="fname">First Name</label>
+      </div>
+      <div class="col-md-5">
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-prepend" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+            <input class="form-control" formControlName="fname" id="fname" name="fname"
+                   placeholder="Enter Your First Name"
+                   required type="text">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-control-feedback">
+          <span class="text-danger align-middle">
+            <!-- Put name validation error messages here -->
+            <ng-container *ngIf="formControls['fname'].errors?.['required'] && formControls['fname'].touched">
+              <span class="text-danger align-middle">
+                <i class="fa fa-times"> First Name Required</i>
+              </span>
+            </ng-container>
+            <ng-container *ngIf="formControls['fname'].errors?.['minlength'] && !formControls['fname'].errors?.['pattern'] && formControls['fname'].touched">
+              <span class="text-danger align-middle">
+                <i class="fa fa-times"> First Name must be least 3 characters long</i>
+              </span>
+            </ng-container>
+            <ng-container *ngIf="!formControls['fname'].errors?.['minlength'] && formControls['fname'].errors?.['pattern'] && formControls['fname'].touched">
+              <span class="text-danger align-middle">
+                <i class="fa fa-times"> Enter only characters</i>
+              </span>
+            </ng-container>
+            <ng-container *ngIf="formControls['fname'].errors?.['minlength'] && formControls['fname'].errors?.['pattern'] && formControls['fname'].touched">
+              <span class="text-danger align-middle">
+                <i class="fa fa-times"> First Name must be least 3 characters long & contains only characters</i>
+              </span>
+            </ng-container>
+          </span>
+        </div>
+      </div>
+    </div>
+    <!-- Last Name -->
+    <div class="row">
+      <div class="col-md-3 field-label-responsive">
+        <label for="lname">Last Name</label>
+      </div>
+      <div class="col-md-5">
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-prepend" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+            <input class="form-control" formControlName="lname" id="lname" name="lname"
+                   placeholder="Enter Your Last Name"
+                   required type="text">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-control-feedback">
+          <span class="text-danger align-middle">
+            <!-- Put name validation error messages here -->
+            <ng-container *ngIf="formControls['lname'].errors?.['required'] && formControls['lname'].touched">
+              <span class="text-danger align-middle">
+                <i class="fa fa-times"> Last Name Required</i>
+              </span>
+            </ng-container>
+            <ng-container *ngIf="formControls['lname'].errors?.['minlength'] && !formControls['lname'].errors?.['pattern'] && formControls['lname'].touched">
+              <span class="text-danger align-middle">
+                <i class="fa fa-times"> Last Name must be least 3 characters long</i>
+              </span>
+            </ng-container>
+            <ng-container *ngIf="!formControls['lname'].errors?.['minlength'] && formControls['lname'].errors?.['pattern'] && formControls['lname'].touched">
+              <span class="text-danger align-middle">
+                <i class="fa fa-times"> Enter only characters</i>
+              </span>
+            </ng-container>
+            <ng-container *ngIf="formControls['lname'].errors?.['minlength'] && formControls['lname'].errors?.['pattern'] && formControls['lname'].touched">
+              <span class="text-danger align-middle">
+                <i class="fa fa-times"> Last Name must be least 3 characters long & contains only characters</i>
+              </span>
+            </ng-container>
+          </span>
+        </div>
+      </div>
+    </div>
+    <!-- Username -->
+    <div class="row">
+      <div class="col-md-3 field-label-responsive">
+        <label for="username">User Name</label>
+      </div>
+      <div class="col-md-5">
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-prepend" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+            <input class="form-control" formControlName="username" id="username" name="username"
+                   placeholder="Enter Your Username"
+                   required type="text">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-control-feedback">
+          <span class="text-danger align-middle">
+            <!-- Put name validation error messages here -->
+            <ng-container *ngIf="formControls['username'].errors?.['required'] && formControls['username'].touched">
+              <span class="text-danger align-middle">
+                <i class="fa fa-times"> Username Required</i>
+              </span>
+            </ng-container>
+            <ng-container *ngIf="formControls['username'].errors?.['minlength'] && !formControls['username'].errors?.['pattern'] && formControls['username'].touched">
+              <span class="text-danger align-middle">
+                <i class="fa fa-times"> Username must be least 6 characters long</i>
+              </span>
+            </ng-container>
+            <ng-container *ngIf="!formControls['username'].errors?.['minlength'] && formControls['username'].errors?.['pattern'] && formControls['username'].touched">
+              <span class="text-danger align-middle">
+                <i class="fa fa-times"> Username contains only characters & numbers</i>
+              </span>
+            </ng-container>
+            <ng-container *ngIf="formControls['username'].errors?.['minlength'] && formControls['username'].errors?.['pattern'] && formControls['username'].touched">
+              <span class="text-danger align-middle">
+                <i class="fa fa-times"> Username must be least 6 characters long & contains only characters & numbers</i>
+              </span>
+            </ng-container>
+          </span>
+        </div>
+      </div>
+    </div>
+    <!-- Email -->
+    <div class="row">
+      <div class="col-md-3 field-label-responsive">
+        <label for="email">E-Mail Address</label>
+      </div>
+      <div class="col-md-5">
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
+            <input class="form-control" formControlName="email" id="email" name="email"
+                   placeholder="Enter Your Email Id"
+                   required type="text">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-control-feedback">
+          <ng-container *ngIf="formControls['email'].errors?.['required'] && formControls['email'].touched">
+            <span class="text-danger align-middle">
+              <i class="fa fa-times"> Email Required</i>
+            </span>
+          </ng-container>
+          <ng-container *ngIf="formControls['email'].errors?.['pattern'] && formControls['email'].touched">
+            <span class="text-danger align-middle">
+              <i class="fa fa-times"> Please enter correct Email</i>
+            </span>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <!-- Password -->
+    <div class="row">
+      <div class="col-md-3 field-label-responsive">
+        <label for="password">Password</label>
+      </div>
+      <div class="col-md-5">
+        <div class="form-group has-danger">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+            <input class="form-control" formControlName="password" id="password" name="password"
+                   placeholder="Enter Your Password" [type]="fieldTextType ? 'text' : 'password'" required>
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <i
+                  class="fa"
+                  [ngClass]="{
+                    'fa-eye-slash': !fieldTextType,
+                     'fa-eye': fieldTextType
+                  }"
+                  (click)="toggleFieldTextType()"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-control-feedback">
+          <span class="text-danger align-middle">
+            <!-- Put name validation error messages here -->
+            <ng-container *ngIf="formControls['password'].errors?.['required'] && formControls['password'].touched">
+              <span class="text-danger align-middle">
+                <i class="fa fa-times"> Password Required</i>
+              </span>
+            </ng-container>
+            <ng-container *ngIf="formControls['password'].errors?.['minlength'] && formControls['password'].errors?.['pattern'] && formControls['password'].touched">
+              <span class="text-danger align-middle">
+                <i class="fa fa-times"> Password should be 8 minimum characters and should contains One Uppercase, One Lowercase, One Special Characters & One Number </i>
+              </span>
+            </ng-container>
+            <ng-container *ngIf="!formControls['password'].errors?.['minlength'] && formControls['password'].errors?.['pattern'] && formControls['password'].touched">
+              <span class="text-danger align-middle">
+                <i class="fa fa-times"> Password should contains One Uppercase, One Lowercase, One Special Characters & One Number </i>
+              </span>
+            </ng-container>
+          </span>
+        </div>
+      </div>
+    </div>
+    <!-- Confirm Password -->
+    <div class="row">
+      <div class="col-md-3 field-label-responsive">
+        <label for="password">Confirm Password</label>
+      </div>
+      <div class="col-md-5">
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon" style="width: 2.6rem">
+              <i class="fa fa-repeat"></i>
+            </div>
+            <input class="form-control" formControlName="confirmPassword" id="password-confirm"
+                   name="password-confirmation"
+                   placeholder="Confirm Your Password" [type]="fieldTextType ? 'text' : 'password'" required>
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <i
+                  class="fa"
+                  [ngClass]="{
+                    'fa-eye-slash': !fieldTextType,
+                     'fa-eye': fieldTextType
+                  }"
+                  (click)="toggleFieldTextType()"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-control-feedback">
+          <ng-container *ngIf="$any(comparePassword) && formControls['confirmPassword'].touched">
+            <span class="text-success align-middle">
+              <i class="fa fa-check"> Passwords match</i>
+            </span>
+          </ng-container>
+          <ng-container *ngIf="!$any(comparePassword) && formControls['confirmPassword'].touched">
+            <span class="text-danger align-middle">
+              <i class="fa fa-close"> Passwords don't match</i>
+            </span>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <!-- Age -->
+    <div class="row">
+      <div class="col-md-3 field-label-responsive">
+        <label for="age">Age</label>
+      </div>
+      <div class="col-md-5">
+        <div class="form-group">
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-prepend" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+            <input class="form-control" formControlName="age" id="age" name="age"
+                   placeholder="Enter Your Age"
+                   required type="number" min="0" max="90">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-control-feedback">
+          <span class="text-danger align-middle">
+            <!-- Put name validation error messages here -->
+            <ng-container *ngIf="formControls['age'].errors?.['required'] && formControls['age'].touched">
+              <span class="text-danger align-middle">
+                <i class="fa fa-times"> Age Required</i>
+              </span>
+            </ng-container>
+            <ng-container *ngIf="formControls['age'].errors?.['min'] && formControls['age'].touched">
+              <span class="text-danger align-middle">
+                <i class="fa fa-times"> Age should be 18+</i>
+              </span>
+            </ng-container>
+          </span>
+        </div>
+      </div>
+    </div>
+    <!-- Register Button -->
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <button [disabled]="(registrationForm.invalid || registrationForm.pending) && registrationForm.touched"
+                class="btn btn-success" type="submit" onclick="window.scrollTo(0, 0);">
+          <i class="fa fa-user-plus"></i> Register
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

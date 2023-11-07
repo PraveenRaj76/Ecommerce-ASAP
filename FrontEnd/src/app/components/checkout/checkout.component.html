@@ -1,0 +1,259 @@
+<ngx-spinner
+  bdColor= "rgba(151,149,149,0.4)"
+  size="large"
+  color="orange"
+  type="ball-clip-rotate-pulse"
+  [fullScreen]="true"
+>
+  <p style="font-size: 20px; color: black">Booking Order...</p>
+</ngx-spinner>
+
+<!-- SECTION -->
+<div class="section" *ngIf="cartData.total > 0">
+  <!-- container -->
+  <div class="container">
+
+    <ng-container *ngIf="$any(addressMessage)?.length > 0">
+      <div class="alert alert-success alert-dismissible">
+        {{addressMessage}}
+      </div>
+    </ng-container>
+
+    <!-- row -->
+    <div class="row">
+
+      <div class="col-md-7 address-details">
+        <form (ngSubmit)="newAddress()" [formGroup]="addressForm" novalidate>
+          <div class="col">
+            <!-- Address Details -->
+            <div class="address-details">
+              <div class="section-title">
+                <h3 class="title">Billing address</h3>
+              </div>
+              <div class="form-group">
+                <input class="input" type="text" name="first-name" placeholder="First Name" [value]="user.fname" readonly>
+              </div>
+              <div class="form-group">
+                <input class="input" type="text" name="last-name" placeholder="Last Name" [value]="user.lname" readonly>
+              </div>
+              <div class="form-group">
+                <input class="input" type="email" name="email" placeholder="Email" [value]="user.email" readonly>
+              </div>
+              <div class="form-group">
+                <input class="form-control" formControlName="address" required type="text" name="address" placeholder="Address" [value]="address?.address">
+                <!-- Address -->
+                <div class="form-control-feedback">
+              <span class="text-danger align-middle">
+                <!-- Put name validation error messages here -->
+                <ng-container *ngIf="formControls['address'].errors?.['required'] && formControls['address'].touched">
+                  <span class="text-danger align-middle">
+                    <i class="fa fa-times"> Address Required</i>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="formControls['address'].errors?.['minlength'] && formControls['address'].touched">
+                  <span class="text-danger align-middle">
+                    <i class="fa fa-times"> Address Required</i>
+                  </span>
+                </ng-container>
+              </span>
+                </div>
+              </div>
+              <div class="form-group">
+                <input class="form-control" formControlName="city" required type="text" name="city" placeholder="City" [value]="address?.city">
+                <!-- City -->
+                <div class="form-control-feedback">
+              <span class="text-danger align-middle">
+                <!-- Put name validation error messages here -->
+                <ng-container *ngIf="formControls['city'].errors?.['required'] && formControls['city'].touched">
+                  <span class="text-danger align-middle">
+                    <i class="fa fa-times"> City Name Required</i>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="formControls['city'].errors?.['minlength'] && !formControls['city'].errors?.['pattern'] && formControls['city'].touched">
+                  <span class="text-danger align-middle">
+                    <i class="fa fa-times"> City Name must be least 3 characters long</i>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="!formControls['city'].errors?.['minlength'] && formControls['city'].errors?.['pattern'] && formControls['city'].touched">
+                  <span class="text-danger align-middle">
+                    <i class="fa fa-times"> Enter only characters</i>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="formControls['city'].errors?.['minlength'] && formControls['city'].errors?.['pattern'] && formControls['city'].touched">
+                  <span class="text-danger align-middle">
+                    <i class="fa fa-times"> City Name must be least 3 characters long & contains only characters</i>
+                  </span>
+                </ng-container>
+              </span>
+                </div>
+              </div>
+              <div class="form-group">
+                <input class="form-control" formControlName="state" required type="text" name="state" placeholder="State" [value]="address?.state">
+                <!-- State -->
+                <div class="form-control-feedback">
+              <span class="text-danger align-middle">
+                <!-- Put name validation error messages here -->
+                <ng-container *ngIf="formControls['state'].errors?.['required'] && formControls['state'].touched">
+                  <span class="text-danger align-middle">
+                    <i class="fa fa-times"> State Name Required</i>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="formControls['state'].errors?.['minlength'] && !formControls['state'].errors?.['pattern'] && formControls['state'].touched">
+                  <span class="text-danger align-middle">
+                    <i class="fa fa-times"> State Name must be least 3 characters long</i>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="!formControls['state'].errors?.['minlength'] && formControls['state'].errors?.['pattern'] && formControls['state'].touched">
+                  <span class="text-danger align-middle">
+                    <i class="fa fa-times"> Enter only characters</i>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="formControls['state'].errors?.['minlength'] && formControls['state'].errors?.['pattern'] && formControls['state'].touched">
+                  <span class="text-danger align-middle">
+                    <i class="fa fa-times"> State Name must be least 3 characters long & contains only characters</i>
+                  </span>
+                </ng-container>
+              </span>
+                </div>
+              </div>
+              <div class="form-group">
+                <input class="form-control" formControlName="country" required type="text" name="country" placeholder="Country" [value]="address?.country">
+                <!-- Country -->
+                <div class="form-control-feedback">
+              <span class="text-danger align-middle">
+                <!-- Put name validation error messages here -->
+                <ng-container *ngIf="formControls['country'].errors?.['required'] && formControls['country'].touched">
+                  <span class="text-danger align-middle">
+                    <i class="fa fa-times"> Country Name Required</i>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="formControls['country'].errors?.['minlength'] && !formControls['country'].errors?.['pattern'] && formControls['country'].touched">
+                  <span class="text-danger align-middle">
+                    <i class="fa fa-times"> Country Name must be least 3 characters long</i>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="!formControls['country'].errors?.['minlength'] && formControls['country'].errors?.['pattern'] && formControls['country'].touched">
+                  <span class="text-danger align-middle">
+                    <i class="fa fa-times"> Enter only characters</i>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="formControls['country'].errors?.['minlength'] && formControls['country'].errors?.['pattern'] && formControls['country'].touched">
+                  <span class="text-danger align-middle">
+                    <i class="fa fa-times"> Country Name must be least 3 characters long & contains only characters</i>
+                  </span>
+                </ng-container>
+              </span>
+                </div>
+              </div>
+              <div class="form-group">
+                <input class="form-control" formControlName="pincode" required type="number" name="pin-code" placeholder="PIN Code" [value]="address?.pincode" min="100000" max="999999">
+                <!-- PIN Code -->
+                <div class="form-control-feedback">
+              <span class="text-danger align-middle">
+                <!-- Put name validation error messages here -->
+                <ng-container *ngIf="formControls['pincode'].errors?.['required'] && formControls['pincode'].touched">
+                  <span class="text-danger align-middle">
+                    <i class="fa fa-times"> PIN Code Required</i>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="formControls['pincode'].errors?.['min'] && formControls['pincode'].touched">
+                  <span class="text-danger align-middle">
+                    <i class="fa fa-times"> Enter correct PIN Code</i>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="formControls['pincode'].errors?.['max'] && formControls['pincode'].touched">
+                  <span class="text-danger align-middle">
+                    <i class="fa fa-times"> Enter correct PIN Code</i>
+                  </span>
+                </ng-container>
+              </span>
+                </div>
+              </div>
+              <div class="form-group">
+                <input class="form-control" formControlName="phone" required type="number" name="phone" placeholder="Phone Number" [value]="address?.phone">
+                <!-- Phone Number -->
+                <div class="form-control-feedback">
+                <span class="text-danger align-middle">
+                <!-- Put name validation error messages here -->
+                <ng-container *ngIf="formControls['phone'].errors?.['required'] && formControls['phone'].touched">
+                  <span class="text-danger align-middle">
+                    <i class="fa fa-times"> Phone Number Required</i>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="formControls['phone'].errors?.['min'] && formControls['phone'].touched">
+                  <span class="text-danger align-middle">
+                    <i class="fa fa-times"> Enter correct Phone Number</i>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="formControls['phone'].errors?.['max'] && formControls['phone'].touched">
+                  <span class="text-danger align-middle">
+                    <i class="fa fa-times"> Enter correct Phone Number</i>
+                  </span>
+                </ng-container>
+              </span>
+                </div>
+              </div>
+            </div>
+            <!-- /Address Details -->
+          </div>
+          <div class="col">
+            <ul class="address-links pull-right">
+              <button [disabled]="(addressForm.invalid || addressForm.pending) && addressForm.touched" class="btn btn-success"
+                      onclick="window.scrollTo(0, 0);" type="submit">
+                {{addressState === true ? 'SAVE' : 'UPDATE'}}
+              </button>
+            </ul>
+          </div>
+        </form>
+      </div>
+
+      <!-- Order Details -->
+      <div class="col-md-5 order-details">
+        <div class="section-title text-center">
+          <h3 class="title">Your Order</h3>
+        </div>
+        <div class="order-summary">
+          <div class="order-col">
+            <div><strong>PRODUCT</strong></div>
+            <div><strong>SubTotal</strong></div>
+          </div>
+          <div class="order-products">
+            <div class="order-col" *ngFor="let c of cartData.data;">
+              <div>{{c.numInCart}}x {{c.product.name}}</div>
+              <div>{{(c.product.price * c.numInCart) | currency:'INR'}}</div>
+            </div>
+          </div>
+          <div class="order-col">
+            <div>Shipping</div>
+            <div><strong>FREE</strong></div>
+          </div>
+          <div class="order-col dropdown-divider">
+            <div><strong>TOTAL</strong></div>
+            <div><strong class="order-total">{{cartTotal | currency:'INR'}}</strong></div>
+          </div>
+        </div>
+
+        <div class="input-checkbox">
+          <input type="checkbox" id="terms">
+          <label for="terms">
+            <span></span>
+            I've read and accept the <a href="/">terms & conditions</a>
+          </label>
+        </div>
+        <button type="submit" name="checkout" id="btn-checkout" class="btn-outline-danger btn-sm my-2 btn-block"
+                [disabled]="cartTotal <= 0" (click)="onCheckout()">
+          Place order
+        </button>
+      </div>
+      <!-- /Order Details -->
+    </div>
+    <!-- /row -->
+  </div>
+  <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+<div *ngIf="cartData.total <= 0;" class="text-center my-5">
+  <h4>Your Cart Is Empty</h4>
+  <button class="btn btn-primary btn-lg mt-3" routerLink="/">GO TO SHOP</button>
+</div>
